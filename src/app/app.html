@@ -1,28 +1,6 @@
-<h1 (click)="isParagraphVisible = !isParagraphVisible; show()">
-  Hello world {{ title | lowercase }} {{ getDate() | date: 'dd MMMM yyyy' }}
-  {{ 0.82 | currency }}
-</h1>
-
-<p *ngIf="isParagraphVisible">Lorem ipsum dolor sit amet...</p>
-
-<ul>
-  <ng-container *ngIf="isParagraphVisible">
-    <li *ngFor="let item of list; index as id">
-      {{ item + ' with id ' + id }}
-    </li>
-  </ng-container>
-</ul>
-
-<ng-container *ngFor="let user of roles; index as idx">
-  <div [ngSwitch]="user.role">
-    <div *ngSwitchCase="'admin'">{{ idx + 1 }}. вітаю, Ви зайшли як адмін {{ user.text }}</div>
-    <div *ngSwitchCase="'user'">{{ idx + 1 }}. вітаю, Ви зайшли як юзер {{ user.text }}</div>
-    <div *ngSwitchCase="'customer'">{{ idx + 1 }}. вітаю, Ви зайшли як клієнт {{ user.text }}</div>
-  </div>
-</ng-container>
-
-<ng-container *ngFor="let user of roles; index as idx">
-  <div [ngStyle]="{ color: getColor(user) }" [ngClass]="{ admin: user.role === 'admin' }">
-    {{ idx + 1 }}. вітаю
-  </div>
-</ng-container>
+<app-show-title [incomingTitle]="title" *ngIf="isComponentVisible" (output)="changeTitle($event)">
+</app-show-title>
+<div class="actions">
+  <button (click)="isComponentVisible = true">Show component</button>
+  <button (click)="isComponentVisible = false">Hide component</button>
+</div>
